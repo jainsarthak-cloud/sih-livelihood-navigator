@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedCounter from '../components/AnimatedCounter';
@@ -40,11 +40,7 @@ const Recommendations = () => {
   // Modal State for Training Centre / Opportunity View Details
   const [selectedDetailsItem, setSelectedDetailsItem] = useState(null);
 
-  useEffect(() => {
-    fetchRecommendationsAndCenters();
-  }, []);
-
-  const fetchRecommendationsAndCenters = async () => {
+  const fetchRecommendationsAndCenters = useCallback(async () => {
     try {
       setLoading(true);
       const [recRes, centerRes] = await Promise.all([
@@ -74,7 +70,11 @@ const Recommendations = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [navigate]);
+
+  useEffect(() => {
+    fetchRecommendationsAndCenters();
+  }, [fetchRecommendationsAndCenters]);
 
   const handleOpenEnrollModal = (item) => {
     setSelectedCourse(item);

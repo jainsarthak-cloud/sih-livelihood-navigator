@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import AnimatedCounter from '../components/AnimatedCounter';
@@ -42,11 +42,7 @@ const OfficerDashboard = () => {
     }
   }, [user, navigate]);
 
-  useEffect(() => {
-    fetchDashboardData();
-  }, [selectedDistrict]);
-
-  const fetchDashboardData = async () => {
+  const fetchDashboardData = useCallback(async () => {
     try {
       setLoading(true);
       const districtQuery = selectedDistrict ? `?district=${encodeURIComponent(selectedDistrict)}` : '';
@@ -65,7 +61,11 @@ const OfficerDashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedDistrict]);
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, [fetchDashboardData]);
 
   if (loading) {
     return (

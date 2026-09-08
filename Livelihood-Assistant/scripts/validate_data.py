@@ -48,22 +48,22 @@ BOLD = "\033[1m"
 
 
 def ok(msg: str) -> str:
-    return f"{GREEN}✓{RESET} {msg}"
+    return f"{GREEN}[OK]{RESET} {msg}"
 
 
 def warn(msg: str) -> str:
-    return f"{YELLOW}⚠{RESET} {msg}"
+    return f"{YELLOW}[WARN]{RESET} {msg}"
 
 
 def err(msg: str) -> str:
-    return f"{RED}✗{RESET} {msg}"
+    return f"{RED}[ERR]{RESET} {msg}"
 
 
 def section(msg: str) -> str:
     return f"\n{BOLD}{CYAN}{msg}{RESET}"
 
 
-# ─── Loader registry ─────────────────────────────────────────────────────────
+# --- Loader registry ---------------------------------------------------------
 LOADERS = {
     "skills": (SkillLoader, "skill_id", "skills.json"),
     "occupations": (OccupationLoader, "occupation_id", "occupations.json"),
@@ -78,7 +78,7 @@ def run_validation(data_dir: Path, verbose: bool) -> int:
     Run all validation checks against data_dir.
     Returns 0 on success, 1 if any errors found.
     """
-    print(f"\n{BOLD}Livelihood-Assistant — Data Validation{RESET}")
+    print(f"\n{BOLD}Livelihood-Assistant - Data Validation{RESET}")
     print(f"Data directory : {data_dir.resolve()}")
     print("-" * 60)
 
@@ -86,12 +86,12 @@ def run_validation(data_dir: Path, verbose: bool) -> int:
     total_warnings = 0
     domain_records: Dict[str, dict] = {}  # domain -> {id -> record}
 
-    # ── Step 1: Load and validate each domain file ───────────────────────────
-    print(section("Step 1 — Domain record loading & Pydantic validation"))
+    # --- Step 1: Load and validate each domain file ---------------------------
+    print(section("Step 1 - Domain record loading & Pydantic validation"))
     for domain, (LoaderClass, id_field, filename) in LOADERS.items():
         fpath = data_dir / filename
         if not fpath.exists():
-            print(warn(f"  {filename} not found in {data_dir} — skipping {domain}"))
+            print(warn(f"  {filename} not found in {data_dir} - skipping {domain}"))
             total_warnings += 1
             domain_records[domain] = {}
             continue
@@ -107,11 +107,11 @@ def run_validation(data_dir: Path, verbose: bool) -> int:
         else:
             print(err(f"  {filename}: {result.total_valid} valid, {result.total_invalid} invalid"))
             for rec_err in result.errors:
-                print(f"    {RED}→{RESET} {rec_err.reason}")
+                print(f"    {RED}->{RESET} {rec_err.reason}")
             total_errors += result.total_invalid
 
-    # ── Step 2: Cross-domain reference validation ────────────────────────────
-    print(section("Step 2 — Cross-domain reference validation"))
+    # --- Step 2: Cross-domain reference validation ---------------------------
+    print(section("Step 2 - Cross-domain reference validation"))
 
     skill_ids: Set[str] = set(domain_records.get("skills", {}).keys())
     course_ids: Set[str] = set(domain_records.get("courses", {}).keys())
@@ -119,38 +119,38 @@ def run_validation(data_dir: Path, verbose: bool) -> int:
 
     ref_errors = 0
 
-    # Occupation → required_skills
+    # Occupation -> required_skills
     for occ_id, occ in domain_records.get("occupations", {}).items():
         for sid in occ.required_skills:
             if sid not in skill_ids:
                 print(err(f"  OCC {occ_id} references unknown skill_id={sid!r}"))
                 ref_errors += 1
 
-    # Occupation → nsqf_qualification_ids
+    # Occupation -> nsqf_qualification_ids
     for occ_id, occ in domain_records.get("occupations", {}).items():
         for cid in occ.nsqf_qualification_ids:
             if cid not in course_ids:
                 print(warn(
                     f"  OCC {occ_id} references course {cid!r} not found in courses file "
-                    f"(may be external QP code — warning only)"
+                    f"(may be external QP code - warning only)"
                 ))
                 total_warnings += 1
 
-    # Course → required_skills / acquired_skills
+    # Course -> required_skills / acquired_skills
     for crs_id, crs in domain_records.get("courses", {}).items():
         for sid in crs.required_skills + crs.acquired_skills:
             if sid not in skill_ids:
                 print(err(f"  CRS {crs_id} references unknown skill_id={sid!r}"))
                 ref_errors += 1
 
-    # Opportunity → required_skills
+    # Opportunity -> required_skills
     for opp_id, opp in domain_records.get("opportunities", {}).items():
         for sid in opp.required_skills:
             if sid not in skill_ids:
                 print(err(f"  OPP {opp_id} references unknown skill_id={sid!r}"))
                 ref_errors += 1
 
-    # Provider → courses_offered
+    # Provider -> courses_offered
     for prv_id, prv in domain_records.get("providers", {}).items():
         for cid in prv.courses_offered:
             if cid not in course_ids:
@@ -161,12 +161,12 @@ def run_validation(data_dir: Path, verbose: bool) -> int:
         print(ok("  All cross-domain references resolved"))
     total_errors += ref_errors
 
-    # ── Step 3: Provenance check (warnings) ──────────────────────────────────
-    print(section("Step 3 — Provenance / source_id presence (warnings)"))
+    # --- Step 3: Provenance check (warnings) ----------------------------------
+    print(section("Step 3 - Provenance / source_id presence (warnings)"))
     prov_warns = 0
     for domain, records in domain_records.items():
         for rid, rec in records.items():
-            # source_id presence — check raw JSON
+            # source_id presence - check raw JSON
             source_id = getattr(rec, "source_id", None)
             if not source_id:
                 print(warn(f"  {domain.upper()} {rid}: source_id is missing"))
@@ -175,8 +175,8 @@ def run_validation(data_dir: Path, verbose: bool) -> int:
         print(ok("  All records have source_id"))
     total_warnings += prov_warns
 
-    # ── Summary ──────────────────────────────────────────────────────────────
-    print("\n" + "─" * 60)
+    # --- Summary --------------------------------------------------------------
+    print("\n" + "-" * 60)
     total_valid = sum(len(v) for v in domain_records.values())
     print(f"{BOLD}Summary{RESET}")
     print(f"  Total valid records : {total_valid}")
@@ -184,10 +184,10 @@ def run_validation(data_dir: Path, verbose: bool) -> int:
     print(f"  Warnings            : {total_warnings}")
 
     if total_errors == 0:
-        print(f"\n{GREEN}{BOLD}✓ Validation passed{RESET}")
+        print(f"\n{GREEN}{BOLD}[OK] Validation passed{RESET}")
         return 0
     else:
-        print(f"\n{RED}{BOLD}✗ Validation FAILED — {total_errors} error(s) found{RESET}")
+        print(f"\n{RED}{BOLD}[ERR] Validation FAILED - {total_errors} error(s) found{RESET}")
         return 1
 
 

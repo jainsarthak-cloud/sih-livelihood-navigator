@@ -166,7 +166,7 @@ const updateOwnProgress = async (req, res, next) => {
     let progress = await TrainingProgress.findOneAndUpdate(
       { enrollmentId },
       { $set: updateFields },
-      { new: true, upsert: true, runValidators: true }
+      { returnDocument: 'after', upsert: true, runValidators: true }
     );
 
     // If attendance > 0 and status is ENROLLED, move enrollment status to IN_PROGRESS

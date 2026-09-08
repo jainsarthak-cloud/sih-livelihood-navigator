@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import client from '../api/client';
@@ -63,6 +63,25 @@ const ProfileForm = () => {
     'Bhopal', 'Indore', 'Patna', 'Muzaffarpur', 'Varanasi', 'Lucknow', 'Jaipur', 'Jodhpur',
   ];
 
+  const mapTranscriptToFormState = useCallback((text) => {
+    setFormData((prev) => {
+      if (activeVoiceField === 'skills') return { ...prev, skills: text };
+      if (activeVoiceField === 'interests') return { ...prev, interests: text };
+      if (activeVoiceField === 'aspirations') return { ...prev, aspirations: text };
+      if (activeVoiceField === 'currentOccupation') {
+        return { ...prev, livelihood: { ...prev.livelihood, currentOccupation: text } };
+      }
+      if (activeVoiceField === 'age') {
+        const num = text.match(/\d+/);
+        if (num) return { ...prev, personal: { ...prev.personal, age: num[0] } };
+      }
+      if (activeVoiceField === 'block') {
+        return { ...prev, location: { ...prev.location, block: text } };
+      }
+      return prev;
+    });
+  }, [activeVoiceField]);
+
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
@@ -107,10 +126,12 @@ const ProfileForm = () => {
       if (recognitionRef.current) {
         try {
           recognitionRef.current.stop();
-        } catch (e) {}
+        } catch {
+          // ignore stop errors
+        }
       }
     };
-  }, [speechLang]);
+  }, [speechLang, mapTranscriptToFormState]);
 
   useEffect(() => {
     const fetchExistingProfile = async () => {
@@ -141,7 +162,7 @@ const ProfileForm = () => {
             source: p.source || 'FORM',
           });
         }
-      } catch (err) {
+      } catch {
         console.log('No pre-existing profile found, starting fresh form.');
       } finally {
         setFetching(false);
@@ -149,21 +170,6 @@ const ProfileForm = () => {
     };
     fetchExistingProfile();
   }, []);
-
-  const mapTranscriptToFormState = (text) => {
-    setFormData((prev) => {
-      const updated = { ...prev };
-      if (activeVoiceField === 'skills') updated.skills = text;
-      else if (activeVoiceField === 'interests') updated.interests = text;
-      else if (activeVoiceField === 'aspirations') updated.aspirations = text;
-      else if (activeVoiceField === 'currentOccupation') updated.livelihood.currentOccupation = text;
-      else if (activeVoiceField === 'age') {
-        const num = text.match(/\d+/);
-        if (num) updated.personal.age = num[0];
-      } else if (activeVoiceField === 'block') updated.location.block = text;
-      return updated;
-    });
-  };
 
   const handleNestedChange = (category, field, value) => {
     setFormData((prev) => ({

@@ -21,6 +21,13 @@ export const AuthProvider = ({ children }) => {
   });
   const [loading, setLoading] = useState(true);
 
+  const logout = () => {
+    setToken(null);
+    setUser(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  };
+
   // Restore user profile on boot
   useEffect(() => {
     const initAuth = async () => {
@@ -65,13 +72,6 @@ export const AuthProvider = ({ children }) => {
       return userObj;
     }
     throw new Error(res.data.message || 'Registration failed');
-  };
-
-  const logout = () => {
-    setToken(null);
-    setUser(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
   };
 
   return (

@@ -33,7 +33,7 @@ const createCourse = async (req, res, next) => {
 const updateCourse = async (req, res, next) => {
   try {
     const course = await NSQFCourse.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
+      returnDocument: 'after',
       runValidators: true,
     });
     if (!course) {

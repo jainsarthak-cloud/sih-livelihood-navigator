@@ -35,7 +35,7 @@ const createOrUpdateProfile = async (req, res, next) => {
       profile = await BeneficiaryProfile.findOneAndUpdate(
         { userId },
         { $set: profileFields },
-        { new: true, runValidators: true }
+        { returnDocument: 'after', runValidators: true }
       );
       return res.status(200).json({
         success: true,

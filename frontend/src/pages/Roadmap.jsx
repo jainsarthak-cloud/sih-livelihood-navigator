@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import client from '../api/client';
@@ -26,11 +26,7 @@ const Roadmap = () => {
   const [loading, setLoading] = useState(true);
   const containerRef = useRef(null);
 
-  useEffect(() => {
-    fetchMyEnrollments();
-  }, []);
-
-  const fetchMyEnrollments = async () => {
+  const fetchMyEnrollments = useCallback(async () => {
     try {
       setLoading(true);
       const res = await client.get('/enrollments/me');
@@ -42,7 +38,11 @@ const Roadmap = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchMyEnrollments();
+  }, [fetchMyEnrollments]);
 
   useEffect(() => {
     if (loading || enrollments.length === 0 || !containerRef.current) return;
