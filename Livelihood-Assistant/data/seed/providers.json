@@ -1,0 +1,28 @@
+[
+  {
+    "_comment": "SYNTHETIC DEMO DATA — NOT OFFICIAL — NOT FOR PRODUCTION USE",
+    "provider_id": "PRV-SYN-001",
+    "name": "Demo Skill Centre [SYNTHETIC]",
+    "provider_type": "community_skill_centre",
+    "accreditation_id": null,
+    "accreditation_status": "unknown",
+    "location": {
+      "state": "Demo State",
+      "district": "Demo District",
+      "block": null,
+      "village": null,
+      "pincode": null,
+      "latitude": null,
+      "longitude": null
+    },
+    "courses_offered": ["CRS-SYN-001", "CRS-SYN-002"],
+    "sectors_covered": ["Textile and Apparel", "Construction and Real Estate"],
+    "contact_info": null,
+    "source_evidence": null,
+    "record_version": "1.0",
+    "is_synthetic": true,
+    "data_classification": "SYNTHETIC",
+    "external_id": null,
+    "source_id": "SRC-SYN-001"
+  }
+]

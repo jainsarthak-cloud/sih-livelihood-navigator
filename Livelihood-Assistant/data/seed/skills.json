@@ -1,0 +1,53 @@
+[
+  {
+    "_comment": "SYNTHETIC DEMO DATA — NOT OFFICIAL — NOT FOR PRODUCTION USE",
+    "skill_id": "SKL-SYN-001",
+    "name": "Basic Garment Stitching",
+    "aliases": ["Silai", "Sewing", "silai ka kaam"],
+    "category": "technical",
+    "proficiency": "unknown",
+    "source": "unknown",
+    "confidence": null,
+    "mapped_raw_skills": [],
+    "evidence": [],
+    "record_version": "1.0",
+    "is_synthetic": true,
+    "data_classification": "SYNTHETIC",
+    "external_id": null,
+    "source_id": "SRC-SYN-001"
+  },
+  {
+    "_comment": "SYNTHETIC DEMO DATA — NOT OFFICIAL — NOT FOR PRODUCTION USE",
+    "skill_id": "SKL-SYN-002",
+    "name": "Basic Electrical Wiring",
+    "aliases": ["Wiring", "Bijli ka kaam", "Electrical work"],
+    "category": "technical",
+    "proficiency": "unknown",
+    "source": "unknown",
+    "confidence": null,
+    "mapped_raw_skills": [],
+    "evidence": [],
+    "record_version": "1.0",
+    "is_synthetic": true,
+    "data_classification": "SYNTHETIC",
+    "external_id": null,
+    "source_id": "SRC-SYN-001"
+  },
+  {
+    "_comment": "SYNTHETIC DEMO DATA — NOT OFFICIAL — NOT FOR PRODUCTION USE",
+    "skill_id": "SKL-SYN-003",
+    "name": "Customer Service Communication",
+    "aliases": ["Customer handling", "Grahak seva"],
+    "category": "soft_skill",
+    "proficiency": "unknown",
+    "source": "unknown",
+    "confidence": null,
+    "mapped_raw_skills": [],
+    "evidence": [],
+    "record_version": "1.0",
+    "is_synthetic": true,
+    "data_classification": "SYNTHETIC",
+    "external_id": null,
+    "source_id": "SRC-SYN-001"
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "_comment": "SYNTHETIC DEMO DATA — NOT OFFICIAL — NOT FOR PRODUCTION USE",
+    "occupation_id": "OCC-SYN-001",
+    "name": "Apparel Stitching Operator",
+    "aliases": ["Tailor", "Darzi", "Garment Maker"],
+    "sector": "Textile and Apparel",
+    "description": "Operates sewing machines to produce garments as part of a textile manufacturing process.",
+    "required_skills": ["SKL-SYN-001", "SKL-SYN-003"],
+    "nsqf_qualification_ids": ["CRS-SYN-001"],
+    "employment_type": "full_time",
+    "source_metadata": null,
+    "record_version": "1.0",
+    "is_synthetic": true,
+    "data_classification": "SYNTHETIC",
+    "external_id": null,
+    "source_id": "SRC-SYN-001"
+  },
+  {
+    "_comment": "SYNTHETIC DEMO DATA — NOT OFFICIAL — NOT FOR PRODUCTION USE",
+    "occupation_id": "OCC-SYN-002",
+    "name": "Electrician Helper",
+    "aliases": ["Bijli Mistri Helper", "Electrical Assistant"],
+    "sector": "Construction and Real Estate",
+    "description": "Assists licensed electricians in wiring, installation, and maintenance tasks under direct supervision.",
+    "required_skills": ["SKL-SYN-002"],
+    "nsqf_qualification_ids": ["CRS-SYN-002"],
+    "employment_type": "apprenticeship",
+    "source_metadata": null,
+    "record_version": "1.0",
+    "is_synthetic": true,
+    "data_classification": "SYNTHETIC",
+    "external_id": null,
+    "source_id": "SRC-SYN-001"
+  }
+]

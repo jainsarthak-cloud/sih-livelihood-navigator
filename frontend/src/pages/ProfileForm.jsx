@@ -54,7 +54,7 @@ const ProfileForm = () => {
     traditionalSkills: 'Handloom',
     interests: 'Textiles, Tailoring',
     aspirations: 'Small Business Owner',
-    employmentPreference: 'SELF_EMPLOYMENT',
+    employmentPreference: 'ANY',
     preferredLanguage: 'Hindi',
     source: 'FORM',
   });
@@ -136,7 +136,7 @@ const ProfileForm = () => {
             traditionalSkills: Array.isArray(p.traditionalSkills) ? p.traditionalSkills.join(', ') : p.traditionalSkills || '',
             interests: Array.isArray(p.interests) ? p.interests.join(', ') : p.interests || '',
             aspirations: Array.isArray(p.aspirations) ? p.aspirations.join(', ') : p.aspirations || '',
-            employmentPreference: p.employmentPreference || 'SELF_EMPLOYMENT',
+            employmentPreference: p.employmentPreference || 'ANY',
             preferredLanguage: p.preferredLanguage || 'Hindi',
             source: p.source || 'FORM',
           });

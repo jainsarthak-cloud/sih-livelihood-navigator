@@ -29,6 +29,7 @@ const Recommendations = () => {
   const [loading, setLoading] = useState(true);
   const [recommendations, setRecommendations] = useState([]);
   const [centers, setCenters] = useState([]);
+  const [enrollmentCenters, setEnrollmentCenters] = useState([]);
   const [filter, setFilter] = useState('ALL');
 
   // Modal State for Enrollment
@@ -77,8 +78,11 @@ const Recommendations = () => {
 
   const handleOpenEnrollModal = (item) => {
     setSelectedCourse(item);
-    if (centers.length > 0) {
-      setSelectedCenterId(centers[0]._id);
+    const matchedCenters = item.details?.trainingCenters;
+    const availableCenters = Array.isArray(matchedCenters) && matchedCenters.length > 0 ? matchedCenters : centers;
+    setEnrollmentCenters(availableCenters);
+    if (availableCenters.length > 0) {
+      setSelectedCenterId(availableCenters[0]._id);
     }
   };
 
@@ -482,7 +486,7 @@ const Recommendations = () => {
 
                 <div>
                   <label className="block text-xs font-extrabold text-[var(--color-text-secondary)] uppercase tracking-wider mb-2">Select Regional Training Center</label>
-                  {centers.length === 0 ? (
+                  {enrollmentCenters.length === 0 ? (
                     <p className="text-xs text-[var(--color-text-muted)] italic">No specific centers loaded. Using default regional hub.</p>
                   ) : (
                     <select
@@ -490,7 +494,7 @@ const Recommendations = () => {
                       onChange={(e) => setSelectedCenterId(e.target.value)}
                       className="w-full bg-[var(--color-bg)] border border-[var(--color-border)] focus:border-[var(--color-accent-primary)] focus:ring-2 focus:ring-[var(--color-accent-primary)]/20 rounded-xl px-4 py-3 text-sm text-[var(--color-text-primary)] font-bold outline-none cursor-pointer"
                     >
-                      {centers.map((c) => (
+                      {enrollmentCenters.map((c) => (
                         <option key={c._id} value={c._id} className="bg-[var(--color-surface)] text-[var(--color-text-primary)]">
                           {c.name} - {c.district || c.address}
                         </option>

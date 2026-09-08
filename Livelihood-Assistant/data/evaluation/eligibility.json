@@ -1,0 +1,10 @@
+[
+  {"case_id":"el-01","synthetic_evaluation":true,"rationale":"Seed apparel course requires primary.","input":{"profile":{"education_level":"primary"},"course_id":"CRS-SYN-001"},"expected":{"status":"eligible"}},
+  {"case_id":"el-02","synthetic_evaluation":true,"rationale":"Below primary is ineligible.","input":{"profile":{"education_level":"none"},"course_id":"CRS-SYN-001"},"expected":{"status":"ineligible"}},
+  {"case_id":"el-03","synthetic_evaluation":true,"rationale":"Unknown education remains unknown.","input":{"profile":{},"course_id":"CRS-SYN-001"},"expected":{"status":"unknown"}},
+  {"case_id":"el-04","synthetic_evaluation":true,"rationale":"Middle exceeds primary requirement.","input":{"profile":{"education_level":"middle"},"course_id":"CRS-SYN-001"},"expected":{"status":"eligible"}},
+  {"case_id":"el-05","synthetic_evaluation":true,"rationale":"Seed electrician course requires primary.","input":{"profile":{"education_level":"primary"},"course_id":"CRS-SYN-002"},"expected":{"status":"eligible"}},
+  {"case_id":"el-06","synthetic_evaluation":true,"rationale":"None is below primary requirement.","input":{"profile":{"education_level":"none"},"course_id":"CRS-SYN-002"},"expected":{"status":"ineligible"}},
+  {"case_id":"el-07","synthetic_evaluation":true,"rationale":"Graduate exceeds primary requirement.","input":{"profile":{"education_level":"graduate"},"course_id":"CRS-SYN-002"},"expected":{"status":"eligible"}},
+  {"case_id":"el-08","synthetic_evaluation":true,"rationale":"Unknown education is not eligible or ineligible.","input":{"profile":{},"course_id":"CRS-SYN-002"},"expected":{"status":"unknown"}}
+]

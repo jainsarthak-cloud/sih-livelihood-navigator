@@ -1,0 +1,51 @@
+[
+  {
+    "scenario_id": "strong_skill_match",
+    "synthetic_demo": true,
+    "rationale": "Existing synthetic apparel skills and primary education support the canonical apparel pathway.",
+    "profile": {"education_level": "primary", "employment_preference": "wage_employment", "location": {"state": "Demo State", "district": "Demo District"}, "normalized_skill_ids": ["SKL-SYN-001", "SKL-SYN-003"]},
+    "expected": {"occupation_id": "OCC-SYN-001", "roadmap_gap_status": "acquired"}
+  },
+  {
+    "scenario_id": "skill_gap",
+    "synthetic_demo": true,
+    "rationale": "One existing apparel skill leaves the other canonical requirement as an explicit gap.",
+    "profile": {"education_level": "primary", "employment_preference": "wage_employment", "location": {"state": "Demo State", "district": "Demo District"}, "normalized_skill_ids": ["SKL-SYN-001"]},
+    "expected": {"occupation_id": "OCC-SYN-001", "roadmap_gap_status": "missing"}
+  },
+  {
+    "scenario_id": "mobility_restriction",
+    "synthetic_demo": true,
+    "rationale": "No travel from a different synthetic district excludes the active local apprenticeship observation.",
+    "profile": {"education_level": "primary", "employment_preference": "apprenticeship", "willingness_to_travel": false, "location": {"state": "Other", "district": "Elsewhere"}, "normalized_skill_ids": ["SKL-SYN-001"]},
+    "expected": {"occupation_id": "OCC-SYN-002", "local_opportunity_count": 0}
+  },
+  {
+    "scenario_id": "work_preference_restriction",
+    "synthetic_demo": true,
+    "rationale": "No synthetic canonical pathway supports the stated self-employment preference.",
+    "profile": {"education_level": "primary", "employment_preference": "self_employment", "location": {"state": "Demo State", "district": "Demo District"}},
+    "expected": {"pathway_count": 0}
+  },
+  {
+    "scenario_id": "unknown_skill",
+    "synthetic_demo": true,
+    "rationale": "An unsupported self-reported skill remains unknown and does not become a canonical skill.",
+    "profile": {"education_level": "primary", "employment_preference": "wage_employment", "location": {"state": "Demo State", "district": "Demo District"}, "traditional_skills": ["plumbing"]},
+    "expected": {"occupation_id": "OCC-SYN-001", "roadmap_gap_status": "unknown"}
+  },
+  {
+    "scenario_id": "no_local_opportunity_evidence",
+    "synthetic_demo": true,
+    "rationale": "The profile is outside the only active synthetic observation scope, so local evidence remains absent.",
+    "profile": {"education_level": "primary", "employment_preference": "apprenticeship", "willingness_to_travel": false, "location": {"state": "Other", "district": "Elsewhere"}, "normalized_skill_ids": ["SKL-SYN-002"]},
+    "expected": {"occupation_id": "OCC-SYN-002", "local_opportunity_count": 0}
+  },
+  {
+    "scenario_id": "incomplete_profile",
+    "synthetic_demo": true,
+    "rationale": "Absent profile facts remain explicit UNKNOWN/incomplete information, not inferred values.",
+    "profile": {},
+    "expected": {"requires_unknown_limitations": true}
+  }
+]

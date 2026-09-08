@@ -1,0 +1,7 @@
+[
+  {"case_id":"rm-01","synthetic_evaluation":true,"rationale":"Complete apparel skill profile yields canonical structural roadmap.","input":{"profile":{"skill_ids":["SKL-SYN-001","SKL-SYN-003"]},"occupation_id":"OCC-SYN-001"},"expected":{"valid":true,"evidence_ids":[]}},
+  {"case_id":"rm-02","synthetic_evaluation":true,"rationale":"Partial apparel profile yields linked canonical training step.","input":{"profile":{"skill_ids":["SKL-SYN-001"]},"occupation_id":"OCC-SYN-001"},"expected":{"valid":true,"evidence_ids":[]}},
+  {"case_id":"rm-03","synthetic_evaluation":true,"rationale":"Unknown skill profile remains structurally valid with UNKNOWN gaps.","input":{"profile":{},"occupation_id":"OCC-SYN-001"},"expected":{"valid":true,"evidence_ids":[]}},
+  {"case_id":"rm-04","synthetic_evaluation":true,"rationale":"Electrical canonical target yields structural roadmap.","input":{"profile":{"skill_ids":["SKL-SYN-002"]},"occupation_id":"OCC-SYN-002"},"expected":{"valid":true,"evidence_ids":[]}},
+  {"case_id":"rm-05","synthetic_evaluation":true,"rationale":"Unknown skills for electrical remain explicit and structurally valid.","input":{"profile":{},"occupation_id":"OCC-SYN-002"},"expected":{"valid":true,"evidence_ids":[]}}
+]

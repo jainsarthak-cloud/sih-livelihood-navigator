@@ -1,0 +1,58 @@
+[
+  {
+    "_comment": "SYNTHETIC DEMO DATA — NOT OFFICIAL — NOT FOR PRODUCTION USE",
+    "opportunity_id": "OPP-SYN-001",
+    "is_synthetic": true,
+    "data_classification": "SYNTHETIC",
+    "title": "Garment Stitching Trainee [SYNTHETIC DEMO]",
+    "opportunity_type": "apprenticeship",
+    "sector": "Textile and Apparel",
+    "description": "Synthetic demo opportunity: on-the-job apprenticeship for garment stitching under a skill centre.",
+    "required_skills": ["SKL-SYN-001"],
+    "location": {
+      "state": "Demo State",
+      "district": "Demo District",
+      "block": null,
+      "village": null,
+      "pincode": null,
+      "latitude": null,
+      "longitude": null
+    },
+    "employer_or_provider": "PRV-SYN-001",
+    "source": null,
+    "collected_at": "2026-01-01T00:00:00+00:00",
+    "verification_status": "unverified",
+    "last_verified_at": null,
+    "lifecycle_status": "active",
+    "financial_assistance": null,
+    "evidence": []
+  },
+  {
+    "_comment": "SYNTHETIC DEMO DATA — NOT OFFICIAL — NOT FOR PRODUCTION USE",
+    "opportunity_id": "OPP-SYN-002",
+    "is_synthetic": true,
+    "data_classification": "SYNTHETIC",
+    "title": "Electrical Helper Vacancy [SYNTHETIC DEMO]",
+    "opportunity_type": "wage_employment",
+    "sector": "Construction and Real Estate",
+    "description": "Synthetic demo opportunity: helper position for an electrical contractor.",
+    "required_skills": ["SKL-SYN-002"],
+    "location": {
+      "state": "Demo State",
+      "district": "Demo District",
+      "block": null,
+      "village": null,
+      "pincode": null,
+      "latitude": null,
+      "longitude": null
+    },
+    "employer_or_provider": null,
+    "source": null,
+    "collected_at": "2026-01-01T00:00:00+00:00",
+    "verification_status": "unverified",
+    "last_verified_at": null,
+    "lifecycle_status": "reported",
+    "financial_assistance": null,
+    "evidence": []
+  }
+]
